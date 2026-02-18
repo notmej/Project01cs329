@@ -4,6 +4,8 @@
  */
 package project01;
 
+import java.util.HashMap;
+
 /**
  *
  * @author yuna
@@ -15,6 +17,28 @@ public class Project01 {
      */
     public static void main(String[] args) {
         System.out.println("Hello world");
+    }
+    
+    // Integer subtraction
+    public String intSubtractionConversion(){
+        HashMap<Integer, Character> ansAsHM = new HashMap<>();
+        String ans = "";
+        
+        //subtraction logic 
+        
+        
+        return ans;
+    }
+    
+    // floating point subtraction
+    public String floatSubtractionConversion(){
+        HashMap<Integer, Character> ansAsHM = new HashMap<>();
+        String ans = "";
+        
+        //subtraction logic 
+        
+        
+        return ans;
     }
     
 }
