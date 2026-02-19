@@ -18,8 +18,8 @@ public class Project01 {
      */
     public static void main(String[] args) {
         
-        System.out.println( Arrays.toString(Convert.intSubtractionConversion( "892639", 10, 2)) );
-        
+        //System.out.println( Arrays.toString(Convert.intSubtractionConversion( "328", 10)) );
+        System.out.println(Convert.convert("382.32", 10,2,3));
     }
     
     
