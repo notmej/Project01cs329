@@ -10,34 +10,50 @@ import java.util.ArrayList;
  *
  * @author yuna
  */
-public class Convert {
+public class Convert2 {
+
     
-    // Integer subtraction
+    
+    //converts (main method for subtraction. takes in DENARY VALUE)
+    public static String convert(String value, int src, int destination, int precision){
+        
+        //splits input into integer part and decimal part
+        String[] parts = value.split("\\.");
+        String intPart = parts[0];
+        String fracPart = (parts.length > 1) ? parts[1] : "";
+        
+        return intSubtractionConversion(intPart, 10);
+        
+    }
+    
+            
+    // Integer subtraction (in charge of the integer part) 
     public static String intSubtractionConversion(String srcVal, int src){
         //Denary --> binary (for now.)
         // this works for denary.
         String convertedValue = "";
         int denSrcVal = Integer.parseInt(srcVal);
         int power = (int) (Math.log(denSrcVal)/Math.log(2));
-        int highestPower = power;
-
-        //-----------------------------------------------------------
-        //       to store values where bit present
+        
+        //arr to store values where bit present
         ArrayList<Integer> powersWhereVal = new ArrayList<>();
-        powersWhereVal.add(highestPower);
+        int index = 0;
+        powersWhereVal.add(power);
+        
         
         //String for final output with length of hwre final bit is
         String bin = "";
-        for( int i = 0; i <= highestPower; i++){  // <= 
+        for( int i = 0; i <= power; i++){
             bin += "0";
             System.out.println(bin);
         }
+
         
         
         System.out.println("Find maximum possible value of the power: " + power);
         
         int coefficient;
-        while (power > 0){
+        while (power > 0){ // only positive values
             coefficient = denSrcVal / ((int) (Math.pow(2, power)));
             denSrcVal = denSrcVal - (coefficient * (int) (Math.pow(2, power)));
             
@@ -46,23 +62,22 @@ public class Convert {
             } else {
                 power = 0;
             }
-            
             powersWhereVal.add(power);
             
             System.out.println("Next next power: " + 2 + "^" + power + " current coeff: " + coefficient);
         }
-        System.out.println(powersWhereVal.toString());
         
+        System.out.println(powersWhereVal.toString());
         // - fix formatting, currrently given as an ArrayList of positions of powers where a HIGH bit should go
         // ignore output for now and the loop below
-        System.out.println(powersWhereVal.size());
         for( int i = 0; i < powersWhereVal.size(); i++){
-//            int pos = 
-//            bin = bin.substring(0 + pos+1) + "\n" + bin.substring(pos+1, bin.length()) +"\n";
+            
         }
-
         
         return bin;
     } 
+   
+    
+    //another method in charge of everything after the decimal
     
 }

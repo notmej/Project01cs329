@@ -18,7 +18,9 @@ public class Project01 {
      */
     public static void main(String[] args) {
         
-        System.out.println( Arrays.toString(Convert.intSubtractionConversion( "892639", 10, 2)) );
+        String z = "hello";
+        System.out.println(Convert.intSubtractionConversion( "64", 10)) ;
+        
         
     }
     
