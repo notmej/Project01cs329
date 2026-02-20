@@ -86,9 +86,9 @@ public class Convert {
 
             int integerPart = (int) fraction;
 
-            result += integerPart;
-
-
+            if(integerPart < 10 )
+                result += integerPart;
+            else result += (char)(integerPart - 10 + 'A');
 
             fraction = fraction - integerPart;
 
