@@ -18,7 +18,8 @@ public class Convert {
         String intPart = parts[0];
         String fracPart = (parts.length > 1) ? parts[1] : "";
         String fracResult = fractionMultiplicationConversion(fracPart, src, destination, precision);
-        String intResult = Integer.toString(Integer.parseInt(intPart, src), destination);
+        String intResult = intMultiplicationConversion(intPart, src, destination);
+
         if(fracPart.equals(""))
             return intResult;
         else
@@ -34,7 +35,31 @@ public class Convert {
     //another method in charge of everything after the decimal
 
 
-    // method for fraction conversion using multiplication
+    public static String intMultiplicationConversion(String intPart, int src, int destination){
+
+        int decimalValue = Integer.parseInt(intPart, src);
+
+        if(decimalValue == 0){
+            return "0";
+        }
+
+        String result = "";
+
+        while(decimalValue > 0){
+
+            int remainder = decimalValue % destination;
+
+            if(remainder < 10)
+                result = remainder + result;
+            else
+                result = (char)(remainder - 10 + 'A') + result;
+
+            decimalValue = decimalValue / destination;
+        }
+
+        return result;
+    }
+
     public static String fractionMultiplicationConversion(String fracPart, int src, int destination, int precision){
 
         // this string will store the final result
