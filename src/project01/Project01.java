@@ -17,9 +17,10 @@ public class Project01 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        String z = "hello";
-        System.out.println(Convert.intSubtractionConversion( "64", 10)) ;
+       
+        String bin = "11101011.1010101110011000";
+        String output = Convert.subtractionConvert(bin, 2, 10, 4);
+        System.out.println("Converty from binary value to denary: " + output);
         
         
     }

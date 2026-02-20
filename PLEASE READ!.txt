@@ -1,0 +1,12 @@
+PLEASE READ! (YES AGAIN)
+
+
+Boshra: Please push everything yo do to eidts-go-here
+Souaad: Please push everything you do to edits-go-here-2
+
+plans after doing methods:
+1. Make Junit4 tests for all the methods
+2. CLI Menu for everything
+
+
+!!! PLEASE REFER TO THE WAY I DID THE STEPS IN MY _-CONVERT CLASS METHOD-_ AND DO SOMETHING SIMILAR FOR YOUR METHODS. IT HAS TO BE IN THAT LEVEL OF DETAIL. HE WANTS TO SEE EVERY SINGLE STEP. !!!
