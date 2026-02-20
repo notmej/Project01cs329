@@ -17,59 +17,64 @@ public class Convert {
         String[] parts = value.split("\\.");
         String intPart = parts[0];
         String fracPart = (parts.length > 1) ? parts[1] : "";
-        
-        return intSubtractionConversion(intPart, 10);
+        String fracResult = fractionMultiplicationConversion(fracPart, src, destination, precision);
+        String intResult = Integer.toString(Integer.parseInt(intPart, src), destination);
+        if(fracPart.equals(""))
+            return intResult;
+        else
+            return intResult + "." + fracResult;
         
     }
     
             
     // Integer subtraction (scratch out probs) (in charge of the integer) 
-    public static String intSubtractionConversion(String srcVal, int src){
-        //Denary --> binary (for now.)
-        // this works for denary.
-        String convertedValue = "";
-        int denSrcVal = Integer.parseInt(srcVal);
-        int power = (int) (Math.log(denSrcVal)/Math.log(2));
-        
-        //arr to store values where bit present
-        ArrayList<Integer> powersWhereVal = new int[power];
-        int index = 0;
-        powersWhereVal[index++] = power;
-        
-        
-        //String for final output
-        String bin = "";
-        for( int i = 0; i < power; i++){
-            bin += "0";
-        }
 
-        
-        
-        System.out.println("Find maximum possible value of the power: " + power);
-        
-        int coefficient;
-        while (power > 0){
-            coefficient = denSrcVal / ((int) (Math.pow(2, power)));
-            denSrcVal = denSrcVal - (coefficient * (int) (Math.pow(2, power)));
-            
-            if(denSrcVal != 0){
-                power = (int) (Math.log(denSrcVal)/Math.log(2));
-            } else {
-                power = 0;
-            }
-            powersWhereVal[index++] = power;
-            
-            System.out.println("Next next power: " + 2 + "^" + power + " current coeff: " + coefficient);
-        }
-        
-        //To-DO:
-        // - fix formatting, currrently given as an array of positions of powers where a bit should go
-        
-        
-        return powersWhereVal;
-    } 
     
     
     //another method in charge of everything after the decimal
+
+
+    // method for fraction conversion using multiplication
+    public static String fractionMultiplicationConversion(String fracPart, int src, int destination, int precision){
+
+        // this string will store the final result
+        String result = "";
+
+        // convert fraction string to decimal number
+        double fraction = 0;
+
+        // convert from source base to decimal
+        for(int i = 0; i < fracPart.length(); i++){
+
+            int digit = Character.getNumericValue(fracPart.charAt(i));
+
+            fraction += digit / Math.pow(src, i+1);
+
+        }
+
+
+
+        // multiplication method
+        for(int i = 0; i < precision; i++){
+
+            fraction = fraction * destination;
+
+            int integerPart = (int) fraction;
+
+            result += integerPart;
+
+
+
+            fraction = fraction - integerPart;
+
+            // stop if fraction becomes 0
+            if(fraction == 0)
+                break;
+
+        }
+
+        return result;
+
+    }
     
 }
