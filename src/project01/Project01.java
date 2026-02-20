@@ -1,26 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package project01;
 
-import java.util.Arrays;
-
-
-/**
- *
- * @author yuna
- */
 public class Project01 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        
-        //System.out.println( Arrays.toString(Convert.intSubtractionConversion( "328", 10)) );
-        System.out.println(Convert.convert("382.32", 10,2,3));
+
+        Project01 obj = new Project01();
+
+        System.out.println(obj.intMultiplicationConversion(5, 3));
+
+        System.out.println(obj.intSubtractionConversion(10, 4));
+
+        System.out.println(obj.floatMultiplicationConversion(2.5f, 4.0f));
+
+        System.out.println(obj.floatSubtractionConversion(7.5f, 2.5f));
+
     }
-    
-    
+
+
+
+    public String intMultiplicationConversion(int num1, int num2){
+
+        int result = num1 * num2;
+
+        return "Int Multiplication: " + result;
+
+    }
+
+
+
+    public String intSubtractionConversion(int num1, int num2){
+
+        int result = num1 - num2;
+
+        return "Int Subtraction: " + result;
+
+    }
+
+
+
+    public String floatMultiplicationConversion(float num1, float num2){
+
+        float result = num1 * num2;
+
+        return "Float Multiplication: " + result;
+
+    }
+
+
+
+    public String floatSubtractionConversion(float num1, float num2){
+
+        float result = num1 - num2;
+
+        return "Float Subtraction: " + result;
+
+    }
+
 }
