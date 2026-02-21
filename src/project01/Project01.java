@@ -20,32 +20,6 @@ public class Project01 {
      */
     public static void main(String[] args) {
 
-        
-//        System.out.println(Convert.multiplicationConvert("235.6703", 10, 2, 4));
-//        System.out.println(Convert.multiplicationConvert("235.6703", 10, 8, 4));
-//        System.out.println(Convert.multiplicationConvert("235.6703", 10, 16, 4));
-//        
-//        System.out.println(Convert.multiplicationConvert("11101011.1010101110011000", 2, 16, 4));
-//        System.out.println(Convert.multiplicationConvert("11101011.1010101110011000", 2, 10, 4));
-//        System.out.println(Convert.multiplicationConvert("11101011.1010101110011000", 2, 8, 4));
-//        
-//        System.out.println(Convert.multiplicationConvert("EB.AB98", 16, 8, 4));
-//        System.out.println(Convert.multiplicationConvert("EB.AB98", 16, 2, 4));
-//            System.out.println(Convert.multiplicationConvert("EB.AB98", 16, 10, 4));
-//            System.out.println(Convert.subtractionConvert("EB.AB98", 16, 10, 4));
-//            System.out.println(Convert.subtractionConvert("EB.AB98", 16, 10, 4));
-//            
-//            System.out.println("\nConverting from source base to decimal:");
-//            double decimalValue = Convert.convertToDecimal("EB.AB98", 16);
-//            System.out.println("Decimal value: " + decimalValue);
-//
-//            System.out.println("\nConverting from decimal to destination base:");
-//            String result = Convert.convertFromDecimal(decimalValue, 10, 4);
-//            System.out.println("Converted value in destination base: " + result);
-//            System.out.println("");
-//            System.out.println("");
-              //System.out.println("====>"+Convert.divisionConvert("EB.AB98", 16, 2, 4));
-
 
         // initialization of values
         ArrayList<ArrayList<String>> allConvertedVal = new ArrayList<>();
@@ -102,28 +76,38 @@ public class Project01 {
                     outVal = Convert.subtractionConvert(inValue, srcBase, destBase, prec);
                     System.out.println("output: " + outVal);
                     ArrayList<String> temp = new ArrayList<>();
-                    temp.add(inValue + "base " + srcBase);
-                    temp.add(outVal + "base "+ destBase);
+                    temp.add(inValue + " base " + srcBase );
+                    temp.add(outVal + " base "+ destBase + " using subtraction method");
                     allConvertedVal.add(temp);
                 } else if (conversionMethod == 2){
                     outVal = Convert.multiplicationConvert(inValue, srcBase, destBase, prec);
                     ArrayList<String> temp = new ArrayList<>();
                     System.out.println("output: " + outVal);
-                    temp.add(inValue + "base " + srcBase);
-                    temp.add(outVal + "base "+ destBase);
+                    temp.add(inValue + " base " + srcBase );
+                    temp.add(outVal + " base " + destBase + " using Multiplication method");
                     allConvertedVal.add(temp);
                 }else if(conversionMethod == 3){
                     outVal = Convert.divisionConvert(inValue, srcBase, destBase, prec);
                     ArrayList<String> temp = new ArrayList<>();
                     System.out.println("output: " + outVal);
-                    temp.add(inValue + "base " + srcBase);
-                    temp.add(outVal + "base "+ destBase);
+                    temp.add(inValue + " base " + srcBase);
+                    temp.add(outVal + " base "+ destBase + " using Division method");
                     allConvertedVal.add(temp);
                 }
             }
             
         }
         
+        System.out.println("\n\n\n------------------------------------------------------------\n- - - Would you like to see all your conversions? - - -\n Type 'y' or 'Y' for yes and any opthey key for no.");
+        input = in.nextLine();
+        if(input.toLowerCase().equals("y")){
+            for(int i = 0; i < allConvertedVal.size(); i++){
+                
+                System.out.print(" " + allConvertedVal.get(i).get(0) + " --> " +  allConvertedVal.get(i).get(1) + " ");
+                
+                System.out.println("");
+            }
+        }
         System.out.println("\nExited program.");
 
     }

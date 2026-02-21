@@ -43,12 +43,12 @@ public class Convert {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
     public static String subtractionConvert(String value, int src, int dest, int prec) throws IllegalArgumentException {
 
-        if(dest == 8){
-            prec *=3;
-        } else if (dest == 16){
-            prec *=4;
+        if (dest == 8) {
+            prec *= 3;
+        } else if (dest == 16) {
+            prec *= 4;
         }
-        
+
         if (src == dest) {
             return value;
         } else if (src == 10 && (dest == 2 || dest == 8 || dest == 16)) {
@@ -63,7 +63,7 @@ public class Convert {
                 return convertAnyToDenary(value, src, prec);
             }
             return subtractionConvertDenaryToAny(convertAnyToDenary(value, src, prec), dest, prec);
-        } else if (src == 16 && (dest == 2 || dest == 8 || dest == 10)) {   
+        } else if (src == 16 && (dest == 2 || dest == 8 || dest == 10)) {
             if (dest == 10) {
                 return convertAnyToDenary(value, src, prec);
             }
@@ -123,6 +123,9 @@ public class Convert {
         purpleHighlightPrint("Final fraction Val: " + fracResult);
         yellowPrint("");
 
+        if (fracResult == 0) {
+            return Integer.toString(decimal);
+        }
         double total = decimal + fracResult;
         String formatted = String.format("%." + prec + "f", total);
         purpleHighlightPrint("Final value from base to denary: " + formatted + "\n");
@@ -130,18 +133,15 @@ public class Convert {
     }
 
     /**
-     * Converts from denary to any base using the subtraction method
-     * UASGE:
-     * - IF BASE = 8, MULTIPLY PREC BY 3
-     * - IF BASE = 16, MULTIPLY PREC BY 4
+     * Converts from denary to any base using the subtraction method UASGE: - IF
+     * BASE = 8, MULTIPLY PREC BY 3 - IF BASE = 16, MULTIPLY PREC BY 4
+     *
      * @param value The value you need to convert (in denary)
      * @param dest destination base to convert denary value to.
      * @param prec precision point for fractions
      * @return Converted value in destination base
      */
     private static String subtractionConvertDenaryToAny(String value, int dest, int prec) {
-        
-        
 
         //splits input into integer part and decimal part
         String[] parts = value.split("\\.");
@@ -208,7 +208,14 @@ public class Convert {
         purpleHighlightPrint("! --- > Final value of fract part: " + fractPartConvertedBin + " base 2 \n\n");
 
         // - - - - - - - - - - - - - -  Combination of fract and binary parts - - - - - - - - - - - - 
-        finalConversionBin = (intPartConvertedBin.length() == 0) ? "0." + fractPartConvertedBin : intPartConvertedBin + "." + fractPartConvertedBin;
+        if (intPartConvertedBin.length() == 0) {
+            finalConversionBin = "0." + fractPartConvertedBin;
+        } else if (fractPartConvertedBin.length() == 0) {
+            finalConversionBin = intPartConvertedBin;
+        } else {
+            finalConversionBin = intPartConvertedBin + "." + fractPartConvertedBin;
+
+        }
         purpleHighlightPrint("- - - > FINAL VALUE IN BINARY: " + finalConversionBin);
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -256,7 +263,14 @@ public class Convert {
 
             purpleHighlightPrint("Base 8 final answer on Fraction side:" + fractFinalConversion);
 
-            finalConversion = (intFinalConversion.length() == 0) ? "0." + fractFinalConversion : intFinalConversion + "." + fractFinalConversion;
+            if (intFinalConversion.length() == 0) {
+                finalConversion = "0." + fractFinalConversion;
+            } else if (fractFinalConversion.length() == 0) {
+                finalConversion = intFinalConversion;
+            } else {
+                finalConversion = intFinalConversion + "." + fractFinalConversion;
+
+            }
             purpleHighlightPrint("Octal final value: " + finalConversion);
 
             return finalConversion;
@@ -321,7 +335,14 @@ public class Convert {
             }
             purpleHighlightPrint("Base 16 final answer on Fraction side:" + fractFinalConversion);
 
-            finalConversion = (intFinalConversion.length() == 0) ? "0." + fractFinalConversion : intFinalConversion + "." + fractFinalConversion;
+            if (intFinalConversion.length() == 0) {
+                finalConversion = "0." + fractFinalConversion;
+            } else if (fractFinalConversion.length() == 0) {
+                finalConversion = intFinalConversion;
+            } else {
+                finalConversion = intFinalConversion + "." + fractFinalConversion;
+
+            }
             purpleHighlightPrint("hex final value: " + finalConversion);
 
             return finalConversion;
@@ -351,7 +372,7 @@ public class Convert {
 
     private static String intMultiplicationConversion(String intPart, int src, int destination) {
         System.out.println("- - - - - - - - - Integer Part - - - - - - - ");
-        
+
         int decimalValue = 0;
 
         System.out.println("- - - - - - - Source base to Decimal conversion - - - - - - - ");
@@ -360,19 +381,19 @@ public class Convert {
             char ch = intPart.charAt(i);
             int digit;
             // convert char to a numeric value
-            if (Character.isDigit(ch))
+            if (Character.isDigit(ch)) {
                 digit = ch - '0';
-            else
+            } else {
                 digit = ch - 'A' + 10;
-            yellowPrint("Step " + (i+1));
+            }
+            yellowPrint("Step " + (i + 1));
             yellowPrint("Digit = " + ch + " → " + digit);
-            
+
             decimalValue = decimalValue * src + digit;
-            
+
             yellowPrint("New Total = previous * " + src + " + " + digit);
             yellowPrint("Total = " + decimalValue);
         }
-        
 
         if (decimalValue == 0) {
             purpleHighlightPrint("Value is 0 → Result = 0");
@@ -391,7 +412,7 @@ public class Convert {
 
             if (remainder < 10) {
                 result = remainder + result;
-                
+
             } else {
                 result = (char) (remainder - 10 + 'A') + result;
             }
@@ -406,6 +427,9 @@ public class Convert {
     }
 
     private static String fractionMultiplicationConversion(String fracPart, int src, int destination, int precision) {
+        if (destination == 10) {
+            precision += 1;
+        }
         System.out.println("- - - - - - - - - Fraction Part - - - - - - - ");
         // this string will store the final result
         String result = "";
@@ -423,17 +447,16 @@ public class Convert {
             yellowPrint("Fraction: " + digit + " / " + Math.pow(src, i + 1) + " = " + fraction);
 
         }
-
+        int count = 0;
         // multiplication method
         for (int i = 0; i < precision; i++) {
-            
+
             cyanPrint("Step " + (i + 1));
             fraction = fraction * destination;
             cyanPrint("Multiply: fraction × " + destination + " = " + fraction);
 
             int integerPart = (int) fraction;
             cyanPrint("Integer Part = " + integerPart);
-
 
             if (integerPart < 10) {
                 result += integerPart;
@@ -447,15 +470,33 @@ public class Convert {
 
             fraction = fraction - integerPart;
             cyanPrint("New Fraction = " + fraction);
-        cyanPrint("Current Result = " + result);
+            cyanPrint("Current Result = " + result);
             // stop if fraction becomes 0
             if (fraction == 0) {
                 purpleHighlightPrint("Fraction became 0 so stopping early");
                 break;
             }
+            count++;
 
         }
+        if (destination == 10) {
+            double temp = Double.parseDouble(result) / Math.pow(10, precision);
+            String formatted = String.format("%." + (precision - 1) + "f", temp);
+            temp = Double.parseDouble(formatted) * Math.pow(10, precision - 1);
+            int temp1 = (int) temp;
+            formatted = String.format("%d", temp1);
+            result = formatted;
+        } else if (destination == 2) {
+            if (count < precision) {
+                for (; count < precision - 1; count++) {
+                    result = result + "0";
+
+                }
+            }
+        }
+
         purpleHighlightPrint("Final Converted Fraction Part = " + result);
+
         return result;
 
     }
@@ -547,6 +588,10 @@ public class Convert {
     }
 
     private static String convertFractionMultiplication(double fractionalPart, int base, int precision) {
+        if (base == 10) {
+            precision += 1;
+        }
+
         StringBuilder result = new StringBuilder();
         int count = 0;
 
@@ -560,6 +605,44 @@ public class Convert {
             result.append(digitToChar(digit));
             fractionalPart -= digit;
             count++;
+        }
+
+        if (base == 10) {
+            if (result.length() > 1) {
+                char last = result.charAt(result.length() - 1);
+                int lastDigit = last >= 'A' ? last - 'A' + 10 : last - '0';
+
+                // check if we should round previous digit
+                if (lastDigit >= base / 2) {
+                    int i = result.length() - 2;
+                    boolean carry = true;
+                    while (i >= 0 && carry) {
+                        char c = result.charAt(i);
+                        int val = c >= 'A' ? c - 'A' + 10 : c - '0';
+                        val++;
+                        if (val == base) {
+                            result.setCharAt(i, '0');
+                            i--;
+                        } else {
+                            result.setCharAt(i, digitToChar(val));
+                            carry = false;
+                        }
+                    }
+                    // if carry propagated past all digits, prepend '1'
+                    if (carry) {
+                        result.insert(0, '1');
+                    }
+                }
+                // remove the extrs digit used for rounding
+                result.setLength(result.length() - 1);
+            }
+        } else if (base == 2) {
+            if (count < precision) {
+                for (; count < precision; count++) {
+                    result.append("0");
+
+                }
+            }
         }
 
         return result.toString();
