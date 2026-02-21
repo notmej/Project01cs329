@@ -4,8 +4,7 @@
  */
 package project01;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -22,10 +21,34 @@ public class Project01 {
     public static void main(String[] args) {
 
         
-        
-        
+//        System.out.println(Convert.multiplicationConvert("235.6703", 10, 2, 4));
+//        System.out.println(Convert.multiplicationConvert("235.6703", 10, 8, 4));
+//        System.out.println(Convert.multiplicationConvert("235.6703", 10, 16, 4));
+//        
+//        System.out.println(Convert.multiplicationConvert("11101011.1010101110011000", 2, 16, 4));
+//        System.out.println(Convert.multiplicationConvert("11101011.1010101110011000", 2, 10, 4));
+//        System.out.println(Convert.multiplicationConvert("11101011.1010101110011000", 2, 8, 4));
+//        
+//        System.out.println(Convert.multiplicationConvert("EB.AB98", 16, 8, 4));
+//        System.out.println(Convert.multiplicationConvert("EB.AB98", 16, 2, 4));
+//            System.out.println(Convert.multiplicationConvert("EB.AB98", 16, 10, 4));
+//            System.out.println(Convert.subtractionConvert("EB.AB98", 16, 10, 4));
+//            System.out.println(Convert.subtractionConvert("EB.AB98", 16, 10, 4));
+//            
+//            System.out.println("\nConverting from source base to decimal:");
+//            double decimalValue = Convert.convertToDecimal("EB.AB98", 16);
+//            System.out.println("Decimal value: " + decimalValue);
+//
+//            System.out.println("\nConverting from decimal to destination base:");
+//            String result = Convert.convertFromDecimal(decimalValue, 10, 4);
+//            System.out.println("Converted value in destination base: " + result);
+//            System.out.println("");
+//            System.out.println("");
+              //System.out.println("====>"+Convert.divisionConvert("EB.AB98", 16, 2, 4));
+
+
         // initialization of values
-        HashMap<String, String> allConvertedVal = new HashMap<>();
+        ArrayList<ArrayList<String>> allConvertedVal = new ArrayList<>();
         int srcBase;
         int destBase;
         String inValue = "";
@@ -38,46 +61,70 @@ public class Project01 {
         
         System.out.println("~~~~~~~~~~ Welcome to the Base to Base converter. ~~~~~~~~~~");
         while(true){
-            System.out.println("Enter the source base (or type 'exit' to exit this program): ");
+            System.out.println("! Type 'x' to leave the program at any time !");
+            System.out.println("Enter the source base: ");
             input = in.nextLine();
-            if(input.equals("exit")) break;
+            if(input.toLowerCase().equals("x")) break;
             srcBase = Integer.parseInt(input);
 
-            System.out.println("Enter your value for conversion (Integer or fraction) (or type 'exit' to exit this program): ");
+            System.out.println("Enter your value for conversion (Integer or fraction): ");
             input = in.nextLine();
-            if(input.equals("exit")) break;
+            if(input.toLowerCase().equals("x")) break;
             inValue = input;
 
-            System.out.println("Enter the destination base (or type 'exit' to exit this program): ");
+            System.out.println("Enter the destination base: ");
             input = in.nextLine();
-            if(input.equals("exit")) break;
+            if(input.toLowerCase().equals("x")) break;
             destBase = Integer.parseInt(input);
 
-            System.out.println("Pick your conversion method: \n 1. Subtraction \n 2. Multiplication \n 3. Division \n (or type 'exit' to exit this program)");
+            System.out.println("Pick your conversion method: \n 1. Subtraction \n 2. Multiplication \n 3. Division ");
             input = in.nextLine();
-            if(input.equals("exit")) break;
+            if(input.toLowerCase().equals("x")) break;
             conversionMethod = Integer.parseInt(input);
             
             if(isFraction(inValue)){
-                System.out.println("Input precision (or type 'exit' to exit this program): ");
+                System.out.println("Input precision : ");
                 input = in.nextLine();
-                if(input.equals("exit")) break;
+                if(input.toLowerCase().equals("x")) break;
                 prec = Integer.parseInt(input);
             }
             
+            boolean errorFound = false;
             try{
                 validateInput(inValue, srcBase, destBase, prec, conversionMethod);
             } catch ( IllegalArgumentException e ){
                 System.out.println("Error: " + e.getMessage());
+                errorFound = true;
             }
+            
+            if(!errorFound){
+                if(conversionMethod == 1){
+                    outVal = Convert.subtractionConvert(inValue, srcBase, destBase, prec);
+                    System.out.println("output: " + outVal);
+                    ArrayList<String> temp = new ArrayList<>();
+                    temp.add(inValue + "base " + srcBase);
+                    temp.add(outVal + "base "+ destBase);
+                    allConvertedVal.add(temp);
+                } else if (conversionMethod == 2){
+                    outVal = Convert.multiplicationConvert(inValue, srcBase, destBase, prec);
+                    ArrayList<String> temp = new ArrayList<>();
+                    System.out.println("output: " + outVal);
+                    temp.add(inValue + "base " + srcBase);
+                    temp.add(outVal + "base "+ destBase);
+                    allConvertedVal.add(temp);
+                }else if(conversionMethod == 3){
+                    outVal = Convert.divisionConvert(inValue, srcBase, destBase, prec);
+                    ArrayList<String> temp = new ArrayList<>();
+                    System.out.println("output: " + outVal);
+                    temp.add(inValue + "base " + srcBase);
+                    temp.add(outVal + "base "+ destBase);
+                    allConvertedVal.add(temp);
+                }
+            }
+            
         }
         
         System.out.println("\nExited program.");
-        
-        
-        
-        
-        
 
     }
     
